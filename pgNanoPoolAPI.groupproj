@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0BC7F326-69E8-4AB9-9D05-01BA73E5E874}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ETNnanopoolViewer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ETNnanopoolViewer">
+        <MSBuild Projects="ETNnanopoolViewer.dproj"/>
+    </Target>
+    <Target Name="ETNnanopoolViewer:Clean">
+        <MSBuild Projects="ETNnanopoolViewer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ETNnanopoolViewer:Make">
+        <MSBuild Projects="ETNnanopoolViewer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ETNnanopoolViewer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ETNnanopoolViewer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ETNnanopoolViewer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
