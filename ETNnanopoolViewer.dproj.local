@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/12/15 17:21:57.000.166,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/15 17:35:20.000.701,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/15 17:38:15.000.052,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/15 22:29:34.000.479,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/17 19:08:29.000.173,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/19 14:53:55.000.759,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/19 15:24:04.000.258,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/19 15:35:06.000.965,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/19 16:47:13.000.287,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/19 17:42:44.000.784,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/12/21 10:47:09.000.359,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/07 11:44:48.000.061,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/09 16:43:33.376,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/09 16:44:02.528,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\uMain.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/09 16:44:02.528,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\uMain.dfm=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2018/01/09 16:44:24.258,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\ETNnanpoolapi.dproj=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2018/01/09 16:56:48.722,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\ETNnanopoolViewer.dproj=C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\ETNnanpoolapi.dproj</Transaction>
+    <Transaction>2018/01/09 17:08:41.149,=C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\djson.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>
