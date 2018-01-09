@@ -13,7 +13,6 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 18
   object pnltop: TPanel
@@ -57,9 +56,8 @@ object Form1: TForm1
     object lblbalance: TLabel
       Left = 16
       Top = 32
-      Width = 61
+      Width = 5
       Height = 18
-      Caption = 'lblbalance'
     end
   end
   object grphashrate: TGroupBox
@@ -72,16 +70,14 @@ object Form1: TForm1
     object lblcurrenthash: TLabel
       Left = 16
       Top = 32
-      Width = 89
+      Width = 5
       Height = 18
-      Caption = 'lblcurrenthash'
     end
     object lblavghash: TLabel
       Left = 16
       Top = 56
-      Width = 67
+      Width = 5
       Height = 18
-      Caption = 'lblavghash'
     end
   end
   object pnlbottom: TPanel
@@ -114,23 +110,20 @@ object Form1: TForm1
     object lblPriceBTC: TLabel
       Left = 16
       Top = 32
-      Width = 70
+      Width = 5
       Height = 18
-      Caption = 'lblPriceBTC'
     end
     object lblPriceUSD: TLabel
       Left = 16
       Top = 56
-      Width = 70
+      Width = 5
       Height = 18
-      Caption = 'lblPriceUSD'
     end
     object lblPriceEUR: TLabel
       Left = 16
       Top = 80
-      Width = 69
+      Width = 5
       Height = 18
-      Caption = 'lblPriceEUR'
     end
   end
   object http: TIdHTTP

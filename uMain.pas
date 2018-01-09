@@ -27,7 +27,6 @@ type
     lblPriceEUR: TLabel;
     procedure btnrefreshClick(Sender: TObject);
     procedure tmrRequestsTimer(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     iRequests: Integer;
@@ -87,11 +86,6 @@ begin
   end
   else
     ShowMessage('You can only make 25 requests per minute.');
-end;
-
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-  btnrefresh.Click;
 end;
 
 procedure TForm1.tmrRequestsTimer(Sender: TObject);
