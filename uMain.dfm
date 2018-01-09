@@ -45,9 +45,6 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      Text = 
-        'etnjvqquchGRXUx6myrz7h5BqA8t2hawS2GdaeX1YhbWNM3bmShgjgKMquHTHx7a' +
-        '7vPN4ALFWWJV5YViFsKp28bu6Vi2n956uH'
     end
   end
   object grpbalance: TGroupBox
