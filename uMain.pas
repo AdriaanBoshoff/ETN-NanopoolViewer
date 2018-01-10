@@ -3,94 +3,180 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, djson;
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, uDataModule,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, djson, IdBaseComponent,
+  IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, FMX.ScrollBox, FMX.Memo,
+  IniFiles, System.IOUtils;
 
 type
-  TForm1 = class(TForm)
+  TfrmMain = class(TForm)
     pnltop: TPanel;
     lbladdress: TLabel;
     edtaddress: TEdit;
-    grpbalance: TGroupBox;
-    lblbalance: TLabel;
-    grphashrate: TGroupBox;
-    lblcurrenthash: TLabel;
-    lblavghash: TLabel;
-    http: TIdHTTP;
-    btnrefresh: TButton;
-    tmrRequests: TTimer;
+    btnClearAddress: TClearEditButton;
     pnlbottom: TPanel;
-    grpprices: TGroupBox;
+    btnRefresh: TButton;
+    grpBalance: TGroupBox;
+    lblBalance: TLabel;
+    lblUnconfirmedBalance: TLabel;
+    grpHashRate: TGroupBox;
+    lblCurrentHashrate: TLabel;
+    lblAvgHashrate: TLabel;
+    grpPrices: TGroupBox;
     lblPriceBTC: TLabel;
     lblPriceUSD: TLabel;
     lblPriceEUR: TLabel;
-    procedure btnrefreshClick(Sender: TObject);
-    procedure tmrRequestsTimer(Sender: TObject);
+    chkAutoRefresh: TCheckBox;
+    tmrAutoRefresh: TTimer;
+    procedure GetGeneralInfo;
+    procedure GetPrices;
+    procedure btnRefreshClick(Sender: TObject);
+    procedure chkAutoRefreshChange(Sender: TObject);
+    procedure tmrAutoRefreshTimer(Sender: TObject);
+    procedure SaveSettingString(Section, Name, Value: string);
+    function LoadSettingString(Section, Name, Value: string): string;
+    procedure edtaddressChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-    iRequests: Integer;
+    configfile: string;
   public
     { Public declarations }
   end;
 
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
 
 implementation
 
-{$R *.dfm}
+{$R *.fmx}
 
-procedure TForm1.btnrefreshClick(Sender: TObject);
-var
-  s: TStringList;
-  balance, hashrate, price: TJSON;
+{ TForm1 }
+
+procedure TfrmMain.btnRefreshClick(Sender: TObject);
 begin
-  if iRequests < 30 then
+  if Trim(edtaddress.Text) <> '' then
   begin
-    s := TStringList.Create;
-    try
-      // Balance
-      iRequests := iRequests + 1;
-      s.Clear;
-      s.Text := http.Get('https://api.nanopool.org/v1/etn/balance/' + edtaddress.Text);
-      balance := TJSON.Parse(s.Text);
-      lblbalance.Caption := 'Balance: ' + balance['data'].AsString + ' ETN';
-
-      // Current Hashrate
-      iRequests := iRequests + 1;
-      s.Clear;
-      s.Text := http.Get('https://api.nanopool.org/v1/etn/hashrate/' + edtaddress.Text);
-      hashrate := TJSON.Parse(s.Text);
-      lblcurrenthash.Caption := 'Current Calculated Hashrate: ' + hashrate['data'].AsString + ' H/s';
-
-      // Average Hashrate
-      iRequests := iRequests + 1;
-      s.Clear;
-      s.Text := http.Get('https://api.nanopool.org/v1/etn/avghashrate/' + edtaddress.Text);
-      hashrate := TJSON.Parse(s.Text);
-      lblavghash.Caption := 'Average Hashrate (Last 1 hour): ' + hashrate['data']['h1'].AsString + ' H/s';
-
-      // Prices
-      iRequests := iRequests + 1;
-      s.Clear;
-      s.Text := http.Get('https://api.nanopool.org/v1/etn/prices');
-      price := TJSON.Parse(s.Text);
-      lblPriceBTC.Caption := price['data']['price_btc'].AsString + ' BTC';
-      lblPriceUSD.Caption := price['data']['price_usd'].AsString + ' USD';
-      lblPriceEUR.Caption := price['data']['price_eur'].AsString + ' EUR';
-    finally
-      s.Free;
-      balance.Free;
-    end;
-  end
-  else
-    ShowMessage('You can only make 25 requests per minute.');
+    GetGeneralInfo;
+    GetPrices;
+  end;
 end;
 
-procedure TForm1.tmrRequestsTimer(Sender: TObject);
+procedure TfrmMain.chkAutoRefreshChange(Sender: TObject);
 begin
-  iRequests := 0;
+  tmrAutoRefresh.Enabled := chkAutoRefresh.Enabled;
+end;
+
+procedure TfrmMain.edtaddressChange(Sender: TObject);
+begin
+  SaveSettingString('Info', 'address', edtaddress.Text);
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+begin
+  Application.Title := 'ETN nanopool Viewer';
+
+  {$IFDEF ANDROID}
+  configfile := System.IOUtils.TPath.GetDocumentsPath + System.SysUtils.PathDelim + 'ETNnanopoolViewer_config.cfg';;
+  {$ENDIF}
+
+  {$IFDEF MSWINDOWS}
+    configfile := '.\config.cfg';
+  {$ENDIF}
+
+  edtaddress.Text := LoadSettingString('Info', 'address', '');
+end;
+
+procedure TfrmMain.GetGeneralInfo;
+var
+  s: TStringList;
+  general: TJSON;
+  status: Boolean;
+begin
+  s := TStringList.Create;
+  try
+    s.Text := dm.http.Get('https://api.nanopool.org/v1/etn/user/' + edtaddress.Text);
+    general := TJSON.Parse(s.Text);
+
+    // Check if api return is valid
+    status := general['status'].AsBoolean;
+    if status = True then
+    begin
+      // Balance
+      lblBalance.Text := 'Current Balance: ' + general['data']['balance'].AsString + ' ETN';
+      lblUnconfirmedBalance.Text := 'Unconfirmed Balance: ' + general['data']['unconfirmed_balance'].AsString + ' ETN';
+
+      // Hashrate
+      lblCurrentHashrate.Text := 'Current Hashrate: ' + general['data']['hashrate'].AsString + ' H/s';
+      lblAvgHashrate.Text := 'Average Hashrate per hour: ' + general['data']['avgHashrate']['h1'].AsString + ' H/s';
+    end
+    else
+      ShowMessage(general['data'].AsString);
+  finally
+    s.Free;
+    general.Free;
+  end;
+end;
+
+procedure TfrmMain.GetPrices;
+var
+  s: TStringList;
+  price: TJSON;
+  status: Boolean;
+begin
+  s := TStringList.Create;
+  try
+    s.Text := dm.http.Get('https://api.nanopool.org/v1/etn/prices');
+    price := TJSON.Parse(s.Text);
+
+    // Check if api return is valid
+    status := price['status'].AsBoolean;
+    if status = True then
+    begin
+      lblPriceBTC.Text := price['data']['price_btc'].AsString + ' BTC';
+      lblPriceUSD.Text := price['data']['price_usd'].AsString + ' USD';
+      lblPriceEUR.Text := price['data']['price_eur'].AsString + ' EUR';
+    end
+    else
+      ShowMessage(price['data'].AsString);
+  finally
+    s.Free;
+    price.Free;
+  end;
+end;
+
+function TfrmMain.LoadSettingString(Section, Name, Value: string): string;
+var
+  ini: TIniFile;
+begin
+  ini := TIniFile.Create(configfile);
+  try
+    Result := ini.ReadString(Section, Name, Value);
+  finally
+    ini.Free;
+  end;
+end;
+
+procedure TfrmMain.SaveSettingString(Section, Name, Value: string);
+var
+  ini: TIniFile;
+begin
+  ini := TIniFile.Create(configfile);
+  try
+    ini.WriteString(Section, Name, Value);
+  finally
+    ini.Free;
+  end;
+end;
+
+procedure TfrmMain.tmrAutoRefreshTimer(Sender: TObject);
+begin
+  if Trim(edtaddress.Text) <> '' then
+  begin
+    GetGeneralInfo;
+    GetPrices;
+  end;
 end;
 
 end.

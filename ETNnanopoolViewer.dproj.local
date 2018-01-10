@@ -13,14 +13,19 @@
     <Transaction>2017/12/19 17:42:44.000.784,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2017/12/21 10:47:09.000.359,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2018/01/07 11:44:48.000.061,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2018/01/09 16:43:33.376,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2018/01/09 16:44:02.528,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\uMain.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2018/01/09 16:44:02.528,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\uMain.dfm=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2018/01/09 16:44:24.258,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\ETNnanpoolapi.dproj=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2018/01/09 16:56:48.722,C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\ETNnanopoolViewer.dproj=C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\ETNnanpoolapi.dproj</Transaction>
-    <Transaction>2018/01/09 17:08:41.149,=C:\Users\adria\OneDrive\Projects (Delphi)\ETN Nanpool\djson.pas</Transaction>
+    <Transaction>2018/01/10 09:31:26.000.498,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/10 09:31:46.000.862,C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\uMain.fmx=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2018/01/10 09:31:46.000.862,C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\uMain.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/10 09:31:58.000.172,C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\ETNnanopoolViewer.dproj=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2018/01/10 09:33:22.000.565,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\Unit1.pas</Transaction>
+    <Transaction>2018/01/10 09:33:30.000.922,C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\uDataModule.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\Unit1.pas</Transaction>
+    <Transaction>2018/01/10 09:33:30.000.922,C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\uDataModule.dfm=C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\Unit1.dfm</Transaction>
+    <Transaction>2018/01/10 09:50:33.000.577,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\extra\djson.pas</Transaction>
+    <Transaction>2018/01/10 09:50:41.000.013,C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\extra\json.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\extra\djson.pas</Transaction>
+    <Transaction>2018/01/10 12:37:49.000.197,C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\extra\json.pas=</Transaction>
+    <Transaction>2018/01/10 12:38:07.000.010,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\ETN nanopool viewer FMX\extra\djson.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5"/>
+		<NoProfile iOSSimulator="iPhone5" Android=""/>
 	</ActiveMobileDevice>
 </BorlandProject>

@@ -1,0 +1,148 @@
+unit uMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, djson,
+  IniFiles;
+
+type
+  TForm1 = class(TForm)
+    pnltop: TPanel;
+    lbladdress: TLabel;
+    edtaddress: TEdit;
+    grpbalance: TGroupBox;
+    lblbalance: TLabel;
+    grphashrate: TGroupBox;
+    lblcurrenthash: TLabel;
+    lblavghash: TLabel;
+    http: TIdHTTP;
+    btnrefresh: TButton;
+    tmrRequests: TTimer;
+    pnlbottom: TPanel;
+    grpprices: TGroupBox;
+    lblPriceBTC: TLabel;
+    lblPriceUSD: TLabel;
+    lblPriceEUR: TLabel;
+    tmrrefresh: TTimer;
+    procedure btnrefreshClick(Sender: TObject);
+    procedure tmrRequestsTimer(Sender: TObject);
+    procedure tmrrefreshTimer(Sender: TObject);
+    procedure SaveSettingString(Section, Name, Value: string);
+    function LoadSettingString(Section, Name, Value: string): string;
+    procedure FormCreate(Sender: TObject);
+    procedure edtaddressChange(Sender: TObject);
+  private
+    { Private declarations }
+    iRequests: Integer;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnrefreshClick(Sender: TObject);
+var
+  s: TStringList;
+  balance, hashrate, price: TJSON;
+begin
+  if Trim(edtaddress.Text) = '' then
+    ShowMessage('Please enter a wallet address')
+  else
+  begin
+    if iRequests < 30 then
+    begin
+      s := TStringList.Create;
+      try
+      // Balance
+        iRequests := iRequests + 1;
+        s.Clear;
+        s.Text := http.Get('https://api.nanopool.org/v1/etn/balance/' + edtaddress.Text);
+        balance := TJSON.Parse(s.Text);
+        lblbalance.Caption := 'Balance: ' + balance['data'].AsString + ' ETN';
+
+      // Current Hashrate
+        iRequests := iRequests + 1;
+        s.Clear;
+        s.Text := http.Get('https://api.nanopool.org/v1/etn/hashrate/' + edtaddress.Text);
+        hashrate := TJSON.Parse(s.Text);
+        lblcurrenthash.Caption := 'Current Calculated Hashrate: ' + hashrate['data'].AsString + ' H/s';
+
+      // Average Hashrate
+        iRequests := iRequests + 1;
+        s.Clear;
+        s.Text := http.Get('https://api.nanopool.org/v1/etn/avghashrate/' + edtaddress.Text);
+        hashrate := TJSON.Parse(s.Text);
+        lblavghash.Caption := 'Average Hashrate (Last 1 hour): ' + hashrate['data']['h1'].AsString + ' H/s';
+
+      // Prices
+        iRequests := iRequests + 1;
+        s.Clear;
+        s.Text := http.Get('https://api.nanopool.org/v1/etn/prices');
+        price := TJSON.Parse(s.Text);
+        lblPriceBTC.Caption := price['data']['price_btc'].AsString + ' BTC';
+        lblPriceUSD.Caption := price['data']['price_usd'].AsString + ' USD';
+        lblPriceEUR.Caption := price['data']['price_eur'].AsString + ' EUR';
+      finally
+        s.Free;
+        balance.Free;
+      end;
+    end
+    else
+      ShowMessage('You can only make 25 requests per minute.');
+  end;
+end;
+
+procedure TForm1.edtaddressChange(Sender: TObject);
+begin
+  SaveSettingString('Info', 'Address', edtaddress.Text);
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  edtaddress.Text := LoadSettingString('Info', 'Address', '');
+end;
+
+function TForm1.LoadSettingString(Section, Name, Value: string): string;
+var
+  ini: TIniFile;
+begin
+  ini := TIniFile.Create('.\config.cfg');
+  try
+   Result := ini.ReadString(Section, Name, Value);
+  finally
+    ini.Free;
+  end;
+end;
+
+procedure TForm1.SaveSettingString(Section, Name, Value: string);
+var
+  ini: TIniFile;
+begin
+  ini := TIniFile.Create('.\config.cfg');
+  try
+    ini.WriteString(Section, Name, Value);
+  finally
+    ini.Free;
+  end;
+end;
+
+procedure TForm1.tmrrefreshTimer(Sender: TObject);
+begin
+  btnrefresh.Click;
+end;
+
+procedure TForm1.tmrRequestsTimer(Sender: TObject);
+begin
+  iRequests := 0;
+end;
+
+end.
+

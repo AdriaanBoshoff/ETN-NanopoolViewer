@@ -1,0 +1,211 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = Single
+  Caption = 'ETN nanopool Viewer'
+  ClientHeight = 434
+  ClientWidth = 412
+  StyleBook = dm.stylbkthemes
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object pnltop: TPanel
+    Align = Top
+    Size.Width = 412.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lbladdress: TLabel
+      Align = Left
+      StyledSettings = [Family, Style, FontColor]
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      Text = 'Address:'
+      TabOrder = 0
+    end
+    object edtaddress: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Contents
+      TabOrder = 1
+      TextSettings.Font.Size = 11.000000000000000000
+      Margins.Left = 75.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 327.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [Family, Style, FontColor]
+      OnChange = edtaddressChange
+      object btnClearAddress: TClearEditButton
+        CanFocus = False
+        Cursor = crArrow
+        Size.Width = 32.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+  end
+  object pnlbottom: TPanel
+    Align = Bottom
+    Position.Y = 392.000000000000000000
+    Size.Width = 412.000000000000000000
+    Size.Height = 42.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object btnRefresh: TButton
+      Align = Right
+      StyledSettings = [Family, Style, FontColor]
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 327.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Refresh'
+      TextSettings.Font.Size = 16.000000000000000000
+      OnClick = btnRefreshClick
+    end
+    object chkAutoRefresh: TCheckBox
+      Align = Left
+      StyledSettings = [Family, Style, FontColor]
+      Margins.Left = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 188.000000000000000000
+      Size.Height = 42.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Auto refresh every 30 secs'
+      TextSettings.Font.Size = 14.000000000000000000
+      OnChange = chkAutoRefreshChange
+    end
+  end
+  object grpBalance: TGroupBox
+    Align = Top
+    StyledSettings = [Family, Style, FontColor, Other]
+    Position.Y = 49.000000000000000000
+    Size.Width = 412.000000000000000000
+    Size.Height = 100.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Balance'
+    TextSettings.Font.Size = 16.000000000000000000
+    TabOrder = 2
+    object lblBalance: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 24.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 609.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Current Balance: 0 ETN'
+      TabOrder = 0
+    end
+    object lblUnconfirmedBalance: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 24.000000000000000000
+      Position.Y = 56.000000000000000000
+      Size.Width = 609.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Unconfirmed Balance: 0 ETN'
+      TabOrder = 1
+    end
+  end
+  object grpHashRate: TGroupBox
+    Align = Top
+    StyledSettings = [Family, Style, FontColor, Other]
+    Position.Y = 149.000000000000000000
+    Size.Width = 412.000000000000000000
+    Size.Height = 100.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Hashrate'
+    TextSettings.Font.Size = 16.000000000000000000
+    TabOrder = 3
+    object lblCurrentHashrate: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 24.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 609.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Current Hashrate: 0 H/s'
+      TabOrder = 0
+    end
+    object lblAvgHashrate: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 24.000000000000000000
+      Position.Y = 56.000000000000000000
+      Size.Width = 609.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Average Hashrate per hour: 0 H/s'
+      TabOrder = 1
+    end
+  end
+  object grpPrices: TGroupBox
+    Align = Top
+    StyledSettings = [Family, Style, FontColor, Other]
+    Position.Y = 249.000000000000000000
+    Size.Width = 412.000000000000000000
+    Size.Height = 128.000000000000000000
+    Size.PlatformDefault = False
+    Text = '1 ETN is worth'
+    TextSettings.Font.Size = 16.000000000000000000
+    TabOrder = 4
+    object lblPriceBTC: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 24.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 289.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = '0 BTC'
+      TabOrder = 0
+    end
+    object lblPriceUSD: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 24.000000000000000000
+      Position.Y = 56.000000000000000000
+      Size.Width = 289.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = '0 USD'
+      TabOrder = 1
+    end
+    object lblPriceEUR: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 24.000000000000000000
+      Position.Y = 80.000000000000000000
+      Size.Width = 289.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = '0 EUR'
+      TabOrder = 2
+    end
+  end
+  object tmrAutoRefresh: TTimer
+    Enabled = False
+    Interval = 30000
+    OnTimer = tmrAutoRefreshTimer
+    Left = 224
+    Top = 305
+  end
+end

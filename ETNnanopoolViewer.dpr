@@ -1,17 +1,17 @@
 program ETNnanopoolViewer;
 
 uses
-  Vcl.Forms,
-  uMain in 'uMain.pas' {Form1},
-  djson in 'djson.pas',
-  Vcl.Themes,
-  Vcl.Styles;
+  System.StartUpCopy,
+  FMX.Forms,
+  uMain in 'uMain.pas' {frmMain},
+  uDataModule in 'uDataModule.pas' {dm: TDataModule},
+  djson in 'extra\djson.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(Tdm, dm);
   Application.Run;
 end.

@@ -4,7 +4,7 @@ object Form1: TForm1
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'ETN nanopool Viewer'
-  ClientHeight = 398
+  ClientHeight = 392
   ClientWidth = 587
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,9 +22,6 @@ object Form1: TForm1
     Height = 41
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = 136
-    ExplicitTop = 80
-    ExplicitWidth = 185
     object lbladdress: TLabel
       Left = 8
       Top = 11
@@ -44,9 +41,6 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      Text = 
-        'etnjvqquchGRXUx6myrz7h5BqA8t2hawS2GdaeX1YhbWNM3bmShgjgKMquHTHx7a' +
-        '7vPN4ALFWWJV5YViFsKp28bu6Vi2n956uH'
     end
   end
   object grpbalance: TGroupBox
@@ -59,9 +53,8 @@ object Form1: TForm1
     object lblbalance: TLabel
       Left = 16
       Top = 32
-      Width = 61
+      Width = 5
       Height = 18
-      Caption = 'lblbalance'
     end
   end
   object grphashrate: TGroupBox
@@ -74,28 +67,23 @@ object Form1: TForm1
     object lblcurrenthash: TLabel
       Left = 16
       Top = 32
-      Width = 89
+      Width = 5
       Height = 18
-      Caption = 'lblcurrenthash'
     end
     object lblavghash: TLabel
       Left = 16
       Top = 56
-      Width = 67
+      Width = 5
       Height = 18
-      Caption = 'lblavghash'
     end
   end
   object pnlbottom: TPanel
     Left = 0
-    Top = 357
+    Top = 351
     Width = 587
     Height = 41
     Align = alBottom
     TabOrder = 3
-    ExplicitLeft = 296
-    ExplicitTop = 328
-    ExplicitWidth = 185
     object btnrefresh: TButton
       Left = 502
       Top = 8
@@ -104,6 +92,32 @@ object Form1: TForm1
       Caption = 'Refresh'
       TabOrder = 0
       OnClick = btnrefreshClick
+    end
+  end
+  object grpprices: TGroupBox
+    Left = 8
+    Top = 231
+    Width = 265
+    Height = 114
+    Caption = '1 ETN is worth:'
+    TabOrder = 4
+    object lblPriceBTC: TLabel
+      Left = 16
+      Top = 32
+      Width = 5
+      Height = 18
+    end
+    object lblPriceUSD: TLabel
+      Left = 16
+      Top = 56
+      Width = 5
+      Height = 18
+    end
+    object lblPriceEUR: TLabel
+      Left = 16
+      Top = 80
+      Width = 5
+      Height = 18
     end
   end
   object http: TIdHTTP
@@ -130,5 +144,11 @@ object Form1: TForm1
     OnTimer = tmrRequestsTimer
     Left = 384
     Top = 64
+  end
+  object tmrrefresh: TTimer
+    Interval = 30000
+    OnTimer = tmrrefreshTimer
+    Left = 312
+    Top = 72
   end
 end
