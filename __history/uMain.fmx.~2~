@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = Single
-  Caption = 'ETN nanopool Viewer (v1.0 by Quantum)'
+  Caption = 'ETN nanopool Viewer'
   ClientHeight = 434
   ClientWidth = 412
   StyleBook = dm.stylbkthemes
